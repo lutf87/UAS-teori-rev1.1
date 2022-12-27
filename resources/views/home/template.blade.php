@@ -21,7 +21,7 @@
 <body>
 
     <!-- navbar -->
-    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <nav class="navbar fixed-top navbar-expand-lg bg-dark navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="#">Mr.Food</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
