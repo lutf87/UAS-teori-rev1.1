@@ -138,8 +138,10 @@ class KategoriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Kategori $kategori)
     {
-        //
+                Storage::delete('public/posts/'. $kategori->foto);
+                $kategori->delete();
+                return redirect()->route('kategori.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }

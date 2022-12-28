@@ -48,7 +48,7 @@
                                     <td>{{ $data->kode }}</td>
                                     <td>{{ $data->nama }}</td>
                                     <td>
-                                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="#"
+                                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('kategori.destroy', $data->id ) }}"
                                             method="POST">
                                             <a href="{{ route('kategori.edit', $data->id) }}"
                                                 class="btn btn-sm btn-primary">Ubah</a>
