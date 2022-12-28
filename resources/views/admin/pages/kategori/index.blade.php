@@ -12,7 +12,7 @@
                     <form action="#">
                         <div class="row">
                             <div class="col">
-                                <a href="#" class="btn btn-success">Tambah Produk</a>
+                                <a href="{{ route('kategori.create') }}" class="btn btn-success">Tambah Produk</a>
                             </div>
                             <div class="col-auto">
                                 <input type="text" name="keyword" id="keyword" class="form-control"
