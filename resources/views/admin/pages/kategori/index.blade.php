@@ -42,11 +42,11 @@
                                 <tr>
                                     <td>{{ ++$no }}</td>
                                     <td class="text-center">
-                                        <img src="{{ Storage::url('public/posts/kategori/') . $data->foto }}" class="rounded"
+                                        <img src="{{ Storage::url('public/posts/kategori/') . $data->foto_kategori }}" class="rounded"
                                             style="width: 200px">
                                     </td>
-                                    <td>{{ $data->kode }}</td>
-                                    <td>{{ $data->nama }}</td>
+                                    <td>{{ $data->kode_kategori }}</td>
+                                    <td>{{ $data->nama_kategori }}</td>
                                     <td>
                                         <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('kategori.destroy', $data->id ) }}"
                                             method="POST">

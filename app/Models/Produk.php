@@ -9,17 +9,13 @@ class Produk extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'nama',
-        'foto',
-        'kategori',
-        'jumlah',
-        'satuan',
-    ];
-
+    /**
+     * Get the kategori that owns the Produk
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function kategori()
     {
-        return $this->belongsTo('App\Models\Kategori', 'kategori');
+        return $this->belongsTo(Kategori::class, 'kategori_id');
     }
-
 }

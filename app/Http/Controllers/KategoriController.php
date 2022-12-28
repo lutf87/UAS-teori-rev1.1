@@ -31,7 +31,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.kategori.create');
+        //
     }
 
     /**
@@ -42,25 +42,7 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'foto'     => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'nama'     => 'required',
-            'kode'   => 'required',
-        ]);
-
-        //upload image
-        $image = $request->file('foto');
-        $image->storeAs('public/posts/kategori', $image->getClientOriginalName());
-
-        //create post
-        Kategori::create([
-            'nama'     => $request->nama,
-            'foto'     => $image->getClientOriginalName(),
-            'kode'   => $request->kode
-        ]);
-
-        //redirect to index
-        return redirect()->route('kategori.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        //
 
     }
 
@@ -83,7 +65,7 @@ class KategoriController extends Controller
      */
     public function edit(Kategori $kategori)
     {
-        return view('admin.pages.kategori.edit', compact('kategori'));
+        //
     }
 
     /**
@@ -95,40 +77,7 @@ class KategoriController extends Controller
      */
     public function update(Request $request, Kategori $kategori)
     {
-        $this->validate($request, [
-            'foto'     => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'nama'     => 'required',
-            'kode'   => 'required'
-        ]);
-
-        //check if image is uploaded
-        if ($request->hasFile('foto')) {
-
-            //upload new image
-            $image = $request->file('foto');
-            $image->storeAs('public/posts/kategori', $image->getClientOriginalName());
-
-            //delete old image
-            Storage::delete('public/posts/kategori/'.$kategori->image);
-
-            //update post with new image
-            $kategori->update([
-                'foto'     => $image->getClientOriginalName(),
-                'nama'     => $request->nama,
-                'kode'   => $request->kode
-            ]);
-
-        } else {
-
-            //update post without image
-            $kategori->update([
-                'nama'     => $request->nama,
-                'kode'   => $request->kode
-            ]);
-        }
-
-        //redirect to index
-        return redirect()->route('kategori.index')->with(['success' => 'Data Berhasil Diubah!']);
+        //
 
     }
 
@@ -140,8 +89,6 @@ class KategoriController extends Controller
      */
     public function destroy(Kategori $kategori)
     {
-                Storage::delete('public/posts/'. $kategori->foto);
-                $kategori->delete();
-                return redirect()->route('kategori.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        //
     }
 }

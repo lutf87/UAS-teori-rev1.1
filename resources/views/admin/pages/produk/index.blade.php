@@ -12,7 +12,7 @@
                     <form action="#">
                         <div class="row">
                             <div class="col">
-                                <a href="#" class="btn btn-success">Tambah Kategori</a>
+                                <a href="{{ route('produk.create') }}" class="btn btn-success">Tambah Produk</a>
                             </div>
                             <div class="col-auto">
                                 <input type="text" name="keyword" id="keyword" class="form-control"
@@ -33,7 +33,7 @@
                                 <th style="width: 50px">No</th>
                                 <th scope="col">Gambar</th>
                                 <th scope="col">Nama Produk</th>
-                                <th scope="col">Kode Kategori</th>
+                                <th scope="col">Kategori</th>
                                 <th scope="col">Jumlah</th>
                                 <th scope="col">Satuan</th>
                                 <th style="width: 150px" scope="col">Opsi</th>
@@ -47,10 +47,10 @@
                                         <img src="{{ Storage::url('public/posts/produk/') . $data->foto }}" class="rounded"
                                             style="width: 200px">
                                     </td>
-                                    <td>{{ $data->nama }}</td>
-                                    <td>{{ $data->kode }}</td>
-                                    <td>{{ $data->jumlah }}</td>
-                                    <td>{{ $data->satuan }}</td>
+                                    <td>{{ $data->nama_produk }}</td>
+                                    <td>{{ $data->kategori['nama_kategori'] }}</td>
+                                    <td>{{ $data->jumlah_produk}}</td>
+                                    <td>{{ $data->satuan_produk }}</td>
                                     <td>
                                         <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="#"
                                             method="POST">

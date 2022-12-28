@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('kategoris', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('nama');
-            $table->string('foto');
-            $table->string('kode');
+            $table->id();
+            $table->string('nama_kategori');
+            $table->string('foto_kategori');
+            $table->string('kode_kategori');
             $table->timestamps();
         });
     }
