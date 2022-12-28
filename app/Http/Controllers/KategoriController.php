@@ -31,7 +31,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.kategori.create');
     }
 
     /**
@@ -42,7 +42,29 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'foto_kategori' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'kode_kategori' => 'required',
+            'nama_kategori' => 'required',
+        ]);
+
+        // up image
+        $image = $request->file('foto_kategori');
+        $image->storeAs('public/posts', $image->getClientOriginalName());
+
+        Kategori::create([
+            'foto_kategori' => $image->getClientOriginalName(),
+            'kode_kategori' => $request->kode_kategori,
+            'nama_kategori' => $request->nama_kategori
+        ]);
+
+        //redirect to index
+
+        if (!$request) {
+            return redirect()->route('admin.pages.kategori.create')->with(['error' => 'Data gagal disimpan!']);
+        } else {
+            return redirect()->route('kategori.index')->with(['success' => 'Data berhasil disimpan!']);
+        }
 
     }
 

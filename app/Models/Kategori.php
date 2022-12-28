@@ -9,6 +9,12 @@ class Kategori extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'nama_kategori',
+        'foto_kategori',
+        'kode_kategori',
+    ];
+
     /**
      * Get all of the produk for the Kategori
      *
