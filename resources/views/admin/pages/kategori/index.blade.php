@@ -50,7 +50,8 @@
                                     <td>
                                         <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="#"
                                             method="POST">
-                                            <a href="#" class="btn btn-sm btn-primary">Ubah</a>
+                                            <a href="{{ route('kategori.edit', $data->id) }}"
+                                                class="btn btn-sm btn-primary">Ubah</a>
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
@@ -69,4 +70,15 @@
             </div>
         </div>
     </div>
+    <script>
+        //message with toastr
+        @if (session()->has('success'))
+
+            toastr.success('{{ session('success') }}', 'BERHASIL!');
+        @elseif (session()->has('error'))
+
+            toastr.error('{{ session('error') }}', 'GAGAL!');
+        @endif
+    </script>
+
 @endsection

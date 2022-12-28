@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class KategoriController extends Controller
 {
@@ -17,10 +18,10 @@ class KategoriController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Kategori $kategori)
     {
         $datas = Kategori::latest()->paginate(5);
-        return view('admin.pages.kategori.index', compact('datas'));
+        return view('admin.pages.kategori.index', compact('datas', 'kategori'));
     }
 
     /**
@@ -80,9 +81,9 @@ class KategoriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Kategori $kategori)
     {
-        //
+        return view('admin.pages.kategori.edit', compact('kategori'));
     }
 
     /**
@@ -92,9 +93,43 @@ class KategoriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Kategori $kategori)
     {
-        //
+        $this->validate($request, [
+            'foto'     => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'nama'     => 'required',
+            'kode'   => 'required'
+        ]);
+
+        //check if image is uploaded
+        if ($request->hasFile('foto')) {
+
+            //upload new image
+            $image = $request->file('foto');
+            $image->storeAs('public/posts', $image->getClientOriginalName());
+
+            //delete old image
+            Storage::delete('public/posts/'.$kategori->image);
+
+            //update post with new image
+            $kategori->update([
+                'foto'     => $image->getClientOriginalName(),
+                'nama'     => $request->nama,
+                'kode'   => $request->kode
+            ]);
+
+        } else {
+
+            //update post without image
+            $kategori->update([
+                'nama'     => $request->nama,
+                'kode'   => $request->kode
+            ]);
+        }
+
+        //redirect to index
+        return redirect()->route('kategori.index')->with(['success' => 'Data Berhasil Diubah!']);
+
     }
 
     /**
