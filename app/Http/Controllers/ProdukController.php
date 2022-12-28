@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produk;
 use Illuminate\Http\Request;
 
 class ProdukController extends Controller
@@ -16,9 +17,10 @@ class ProdukController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $datas = Produk::orderBy('created_at', 'asc')->paginate(10);
+        return view('admin.pages.produk.index', compact('datas'))->with('no', ($request->input('page', 1) - 1) * 10);
     }
 
     /**
