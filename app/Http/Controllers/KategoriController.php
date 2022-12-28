@@ -18,10 +18,10 @@ class KategoriController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Kategori $kategori)
+    public function index(Kategori $kategori, Request $request)
     {
-        $datas = Kategori::latest()->paginate(5);
-        return view('admin.pages.kategori.index', compact('datas', 'kategori'));
+        $datas = Kategori::orderBy('created_at', 'asc')->paginate(10);
+        return view('admin.pages.kategori.index', compact('datas', 'kategori'))->with('no', ($request->input('page', 1) - 1) * 10);
     }
 
     /**
@@ -50,7 +50,7 @@ class KategoriController extends Controller
 
         //upload image
         $image = $request->file('foto');
-        $image->storeAs('public/posts', $image->getClientOriginalName());
+        $image->storeAs('public/posts/kategori', $image->getClientOriginalName());
 
         //create post
         Kategori::create([
@@ -106,10 +106,10 @@ class KategoriController extends Controller
 
             //upload new image
             $image = $request->file('foto');
-            $image->storeAs('public/posts', $image->getClientOriginalName());
+            $image->storeAs('public/posts/kategori', $image->getClientOriginalName());
 
             //delete old image
-            Storage::delete('public/posts/'.$kategori->image);
+            Storage::delete('public/posts/kategori/'.$kategori->image);
 
             //update post with new image
             $kategori->update([

@@ -12,7 +12,7 @@
                     <form action="#">
                         <div class="row">
                             <div class="col">
-                                <a href="{{ route('kategori.create') }}" class="btn btn-success">Tambah Produk</a>
+                                <a href="{{ route('kategori.create') }}" class="btn btn-success">Tambah Kategori</a>
                             </div>
                             <div class="col-auto">
                                 <input type="text" name="keyword" id="keyword" class="form-control"
@@ -33,16 +33,16 @@
                                 <th style="width: 50px">No</th>
                                 <th scope="col">Gambar</th>
                                 <th scope="col">Kode</th>
-                                <th scope="col">Nama</th>
+                                <th scope="col">Nama Kategori</th>
                                 <th style="width: 150px" scope="col">Opsi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($datas as $data)
                                 <tr>
-                                    <td></td>
+                                    <td>{{ ++$no }}</td>
                                     <td class="text-center">
-                                        <img src="{{ Storage::url('public/posts/') . $data->foto }}" class="rounded"
+                                        <img src="{{ Storage::url('public/posts/kategori/') . $data->foto }}" class="rounded"
                                             style="width: 200px">
                                     </td>
                                     <td>{{ $data->kode }}</td>
@@ -71,7 +71,6 @@
         </div>
     </div>
     <script>
-        //message with toastr
         @if (session()->has('success'))
 
             toastr.success('{{ session('success') }}', 'BERHASIL!');
