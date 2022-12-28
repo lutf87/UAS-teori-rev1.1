@@ -50,7 +50,7 @@ class KategoriController extends Controller
 
         // up image
         $image = $request->file('foto_kategori');
-        $image->storeAs('public/posts', $image->getClientOriginalName());
+        $image->storeAs('public/image/kategori', $image->getClientOriginalName());
 
         Kategori::create([
             'foto_kategori' => $image->getClientOriginalName(),
@@ -61,11 +61,10 @@ class KategoriController extends Controller
         //redirect to index
 
         if (!$request) {
-            return redirect()->route('admin.pages.kategori.create')->with(['error' => 'Data gagal disimpan!']);
+            return redirect()->route('kategori.create')->with(['error' => 'Data gagal disimpan!']);
         } else {
             return redirect()->route('kategori.index')->with(['success' => 'Data berhasil disimpan!']);
         }
-
     }
 
     /**
@@ -87,7 +86,7 @@ class KategoriController extends Controller
      */
     public function edit(Kategori $kategori)
     {
-        //
+        return view('admin.pages.kategori.edit', compact('kategori'));
     }
 
     /**
@@ -99,8 +98,43 @@ class KategoriController extends Controller
      */
     public function update(Request $request, Kategori $kategori)
     {
-        //
+        $this->validate($request, [
+            'nama_kategori'     => 'required',
+            'foto_kategori'     => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'kode_kategori'   => 'required'
+        ]);
 
+
+        if ($request->hasFile('foto_kategori')) {
+
+
+            $image = $request->file('foto_kategori');
+            $image->storeAs('public/image/kategori', $image->getClientOriginalName());
+
+
+            Storage::delete('public/image/kategori' . $kategori->image);
+
+
+            $kategori->update([
+                'nama_kategori'     => $request->nama_kategori,
+                'foto_kategori'     => $image->getClientOriginalName(),
+                'kode_kategori'   => $request->kode_kategori,
+            ]);
+        } else {
+
+            //update post without image
+            $kategori->update([
+                'nama_kategori'     => $request->nama_kategori,
+                'kode_kategori'   => $request->kode_kategori,
+            ]);
+        }
+
+
+        if (!$request) {
+            return redirect()->route('kategori.create')->with(['error' => 'Data gagal diedit!']);
+        } else {
+            return redirect()->route('kategori.index')->with(['success' => 'Data berhasil diedit!']);
+        }
     }
 
     /**

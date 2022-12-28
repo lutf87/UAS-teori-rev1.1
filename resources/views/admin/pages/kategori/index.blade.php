@@ -42,7 +42,7 @@
                                 <tr>
                                     <td>{{ ++$no }}</td>
                                     <td class="text-center">
-                                        <img src="{{ Storage::url('public/posts/kategori/') . $data->foto_kategori }}" class="rounded"
+                                        <img src="{{ Storage::url('public/image/kategori/') . $data->foto_kategori }}" class="rounded"
                                             style="width: 200px">
                                     </td>
                                     <td>{{ $data->kode_kategori }}</td>
