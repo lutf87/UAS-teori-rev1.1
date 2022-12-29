@@ -67,18 +67,19 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## system requirements
 
-php 8.0 || 8.1
+php 8.0 || 8.1 <br>
 node js 16.19.x
 
 ## Instalasi
 
-~$ composer update
-~$ cp .env.example .env
-~$ php artisan key:generate
-~$ npm run dev
-~$ php artisan migrate:fresh --seed
-~$ php artisan storage:link
+~$ composer update <br>
+~$ cp .env.example .env <br>
+~$ php artisan key:generate <br>
+~$ npm run dev <br>
+~$ php artisan migrate:fresh --seed <br>
+~$ php artisan storage:link <br>
 
 ## login
-username : admin@gmail.com
-password : password
+
+username : admin@gmail.com <br>
+password : password <br>
